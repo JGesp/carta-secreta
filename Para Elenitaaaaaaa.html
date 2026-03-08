@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Elena 🌸</title>
+
+<style>
+    /* Importamos fuentes bonitas */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Nunito:wght@400;700&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Nunito', sans-serif;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        overflow: hidden; /* Evita barras de desplazamiento */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        color: #4a4a4a;
+    }
+
+    /* --- PANTALLA DE INICIO (CUBRE TODO AL INICIO) --- */
+    #start-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        z-index: 9999; /* Muy alto para estar encima de todo */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    #start-screen h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 50px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        margin-bottom: 30px;
+    }
+
+    .open-btn {
+        padding: 15px 40px;
+        font-size: 20px;
+        background: white;
+        color: #ff5e78;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        font-weight: bold;
+    }
+
+    .open-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    /* --- CARTA (OCULTA AL INICIO) --- */
+    .container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+        max-width: 520px;
+        width: 90%;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        display: none; /* Oculto por defecto */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Clase para mostrar la carta */
+    .container.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #ff5e78;
+    }
+
+    p {
+        font-size: 17px;
+        line-height: 1.7;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 94, 120, 0.3);
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(255, 94, 120, 0.4);
+    }
+
+    #hiddenMessage {
+        display: none;
+        margin-top: 20px;
+        padding: 15px;
+        background: #fff0f3;
+        border-radius: 10px;
+        border: 1px solid #ffccd5;
+        color: #d6336c;
+        font-weight: bold;
+        animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corazones */
+    .heart {
+        position: absolute;
+        color: #ff5e78;
+        font-size: 20px;
+        pointer-events: none;
+        animation: float 6s linear infinite;
+        z-index: 1;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 1; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- PANTALLA DE INICIO (CUBRE TODO) -->
+    <div id="start-screen">
+        <h1>🌸 Para Elena 🌸</h1>
+        <p style="color: white; font-size: 18px; margin-bottom: 30px;">Tengo algo especial para ti...</p>
+        <button class="open-btn" onclick="abrirCarta()">Abrir carta 💌</button>
+    </div>
+
+    <!-- CARTA (OCULTA) -->
+    <div class="container" id="letter">
+        <h1>🌸 Feliz Día de la Mujer, Elena 🌸</h1>
+
+        <p>
+            Elena, hoy quería escribirte algo especial.<br><br>
+            Tal vez todavía no somos novios, pero quiero que sepas que desde que te conocí me di cuenta de que eres una persona muy especial. Hay algo en tu forma de ser, en tu sonrisa y en tu manera de ver la vida que simplemente hace que todo se sienta más bonito.<br><br>
+            Admiro mucho la mujer que eres: tu inteligencia, tu corazón y la forma en que iluminas los lugares donde estás. No todas las personas tienen esa capacidad de transmitir tanta luz… y tú definitivamente la tienes.<br><br>
+            Hoy se celebra a las mujeres increíbles, y sinceramente pienso que tú eres una de ellas.<br><br>
+            Tengo la sensación de que lo mejor entre nosotros todavía está por venir ✨
+        </p>
+
+        <button onclick="revelarMensaje()">Abrir un mensaje para ti 💌</button>
+        
+        <div id="hiddenMessage">
+            Elena, solo quería recordarte algo: eres una mujer increíble y me encanta haberte conocido. Feliz Día de la Mujer 🌷
+        </div>
+    </div>
+
+<script>
+    // Función para abrir la carta
+    function abrirCarta() {
+        console.log("Botón clickeado - Abriendo carta..."); // Para verificar que funciona
+        
+        const startScreen = document.getElementById('start-screen');
+        const letter = document.getElementById('letter');
+
+        // 1. Desvanecer la pantalla de inicio
+        startScreen.style.opacity = '0';
+        startScreen.style.visibility = 'hidden'; // Ya no bloquea clics
+
+        // 2. Mostrar la carta inmediatamente
+        letter.style.display = 'block';
+        
+        // 3. Forzar un pequeño retraso para que el navegador renderice el display:block antes de la opacidad
+        setTimeout(() => {
+            letter.classList.add('show');
+            iniciarCorazones();
+        }, 50);
+
+        // 4. Eliminar la pantalla de inicio del DOM después de la animación
+        setTimeout(() => {
+            startScreen.remove();
+        }, 1000);
+    }
+
+    // Función para mostrar el mensaje oculto
+    function revelarMensaje() {
+        const btn = document.querySelector('.container button');
+        const msg = document.getElementById('hiddenMessage');
+        
+        btn.style.display = 'none';
+        msg.style.display = 'block';
+        
+        // Lluvia de corazones extra
+        for(let i=0; i<30; i++) {
+            setTimeout(crearCorazon, i * 50);
+        }
+    }
+
+    // Control de los corazones
+    let intervalId = null;
+
+    function iniciarCorazones() {
+        if (!intervalId) {
+            intervalId = setInterval(crearCorazon, 300);
+        }
+    }
+
+    function crearCorazon() {
+        const hearts = document.querySelectorAll('.heart');
+        if (hearts.length > 50) return; 
+
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        
+        const emojis = ["❤", "🌸", "✨", "🌷", "💖"];
+        heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        heart.style.color = Math.random() > 0.5 ? "#ff5e78" : "#ff9a9e";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+</script>
+
+</body>
+</html>
